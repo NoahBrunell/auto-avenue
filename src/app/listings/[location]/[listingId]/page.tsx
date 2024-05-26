@@ -2,7 +2,7 @@
 import { getListingById } from '@/utils/handleDatabase';
 import React, { useEffect, useState } from 'react'
 
-export default function page({ params }: {
+export default function Page({ params }: {
     params: { listingId: string }
 }) {
   interface Listing {
