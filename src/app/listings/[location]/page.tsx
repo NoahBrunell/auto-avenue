@@ -1,5 +1,6 @@
 'use client'
 import { getAllListings, getListings } from '@/utils/handleDatabase'
+import { reverse } from 'dns'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -44,7 +45,6 @@ export default function Page({ params }: {
       }
     }
     fetchListings()
-    listings.reverse()
   },[params.location])
 
   return (
