@@ -44,6 +44,7 @@ export default function Page({ params }: {
       }
     }
     fetchListings()
+    listings.reverse()
   },[params.location])
 
   return (
