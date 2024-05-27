@@ -1,19 +1,19 @@
 'use client'
 import { getAllListings, getListings } from '@/utils/handleDatabase'
-import { reverse } from 'dns'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 export default function Page({ params }: {
     params: { location: string }
 }) {
+  const router = useRouter()
+
   interface Listing {
     id: number;
     title: string;
     brand: string;
     model: string;
     mileage: number;
-    hours: number;
     description: string;
     number: string;
     email: string;
@@ -24,10 +24,11 @@ export default function Page({ params }: {
   }
 
   const [listings, setListings] = useState<Listing[]>([])
-  const router = useRouter()
 
+  // Get listings for location
   useEffect(() => {
     const fetchListings = async () => {
+      // Get all listings if location is set to all
       if (params.location == 'all') {
         try {
           const result = await getAllListings()
@@ -36,6 +37,7 @@ export default function Page({ params }: {
           console.error('Something went wrong: ' + error)
         }
       } else {
+      // Get location specific listings if location is not set to all
         try {
           const result = await getListings(params.location)
           setListings(result)
@@ -57,6 +59,7 @@ export default function Page({ params }: {
     </div>
     
     <div className='w-screen h-fit flex flex-col items-center'>
+      {/* Map out listings if listings is not empty */}
       {listings.length > 0 ? (
         listings.map((listing, index) => (
           <div onClick={() => {router.push(`./${params.location}/${listing.id}`)}} key={index} className={'w-[80vw] h-52 border border-t-gray border-x-0 border-b-0 mt-2 py-4 flex hover:cursor-pointer active:bg-slate-100'}>

@@ -2,7 +2,7 @@
 
 ## Description
 
-Auto Avenue is a web application built with Next.js, React, and Tailwind CSS. It provides functionalities related to automobile services.
+Auto Avenue is a web application built with Next.js, React, and Tailwind CSS. It provides an online marketplace for cars.
 
 ## Installation
 

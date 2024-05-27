@@ -1,29 +1,22 @@
 "use server"
 import { db } from './db'
 
-// db.connect().then((res) => console.log('Connected')).catch((err) => console.log(err))
+db.connect().then((res) => console.log('Connected')).catch((err) => console.log(err))
 
-// export async function getData() {
-//     const data = await db.query('SELECT * FROM projects')
-//     return data.rows
-// }
-
-// export async function getTime() {
-//     const data = await db.query('SELECT timer FROM projects')
-//     return data.rows
-// }
-
+// Get all listings
 export async function getAllListings() {
     const data = await db.query('SELECT * FROM listings')
     return data.rows
 }
 
+// Get one specific listing
 export async function getListingById(listingId:string) {
     const id = Number(listingId)
     const data = await db.query('SELECT * FROM listings WHERE id = $1', [id])
     return data.rows
 }
 
+// Get location specific listings
 export async function getListings(location:string) {
     const data = await db.query('SELECT * FROM listings WHERE location = $1', [location])
     return data.rows
@@ -40,43 +33,3 @@ export async function saveListing(data:any) {
         return 'Something went wrong'
     }
 }
-
-// export async function saveTime(time:number, id:number) {
-//     try {
-//         await db.query("UPDATE projects SET timer = $1 WHERE id = $2", 
-//         [time, id])
-//         return 'Saved successfully'
-//     } catch (error) {
-//         console.log(error);
-//         return 'Something went wrong'
-        
-//     }
-// }
-
-// export async function saveTimestamp(id:number, type:string,) {
-//     try {
-//         await db.query("INSERT INTO projectlogs(id, type) VALUES ($1, $2)", 
-//         [id, type])
-//         return 'Saved timestamp successfully'
-//     } catch (error) {
-//         console.log(error);
-//         return 'Something went wrong'
-//     }
-// }
-
-// export async function getTimestamp(id:number) {
-//     const data = await db.query('SELECT * FROM projectlogs WHERE id = $1', [id])
-//     return data.rows
-// }
-
-// export async function deleteProject(id:number) {
-//     try {
-//         await db.query("DELETE FROM projects WHERE id = $1", 
-//         [id])
-//         return 'Deleted successfully'
-//     } catch (error) {
-//         console.log(error);
-//         return 'Something went wrong'
-        
-//     }
-// }

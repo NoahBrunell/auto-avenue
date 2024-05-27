@@ -22,6 +22,7 @@ export default function Page({ params }: {
 
   const [listing, setListing] = useState<Listing[]>([])
 
+  // Get a specific listing by id
   useEffect(() => {
     const fetchListings = async () => {
       try {
